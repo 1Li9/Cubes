@@ -4,11 +4,10 @@ using UnityEngine.Pool;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private ObjectPoolController _objectPoolController;
-    [SerializeField] private GameObject _prefab;
     [SerializeField] private float _radius;
     [SerializeField] private float _timePeriods;
 
-    private ObjectPool<GameObject> _objectPool;
+    private ObjectPool<SpawnableObject> _objectPool;
 
     private void Start()
     {
@@ -24,16 +23,10 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        float xPosition = UserUtils.GetRandomNormalizedFloat() * _radius;
-        float yPosition = UserUtils.GetRandomNormalizedFloat() * _radius;
-        float zPosition = UserUtils.GetRandomNormalizedFloat() * _radius;
-        Vector3 position = new Vector3(xPosition, yPosition, zPosition) + transform.position;
+        SpawnableObject obj = _objectPool.Get();
+        Vector3 position = Random.insideUnitSphere * _radius + transform.position;
 
-        GameObject obj = _objectPool.Get();
-
-        if (obj.TryGetComponent(out ISpawnable spawnable))
-            spawnable.ObjectPool = _objectPool;
-
+        obj.ObjectPool = _objectPool;
         obj.transform.position = position;
     }
 }

@@ -1,40 +1,43 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
-[RequireComponent(typeof(ColorChanger))]
-public class Cube : MonoBehaviour, IInteractable, ISpawnable
+[RequireComponent(typeof(ColorChanger), typeof(Renderer), typeof(Rigidbody))]
+public class Cube : SpawnableObject, IInteractable
 {
     [SerializeField] private Color _deafultColor = Color.white;
     [SerializeField] private int _minLifeTime = 2;
     [SerializeField] private int _maxLifeTime = 5;
 
     private ColorChanger _colorChanger;
+    private Renderer _renderer;
+    private Rigidbody _rigidbody;
     private bool _wasInteract = false;
 
-    public ObjectPool<GameObject> ObjectPool { get; set; }
+    private void Awake()
+    {
+        _colorChanger = GetComponent<ColorChanger>();
+        _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _renderer.material.color = _deafultColor;
+    }
 
     public void Interact()
     {
         if (_wasInteract)
             return;
 
-        _colorChanger = GetComponent<ColorChanger>();
         _wasInteract = true;
 
-        if (TryGetComponent(out Renderer renderer))
-            _colorChanger.SetRandom(renderer);
+        _colorChanger.SetRandom(_renderer);
 
-        float lifeTime = UserUtils.GetRandomNumber(_minLifeTime, _maxLifeTime);
-
+        float lifeTime = Random.Range(_minLifeTime, _maxLifeTime);
         Invoke(nameof(Destroy), lifeTime);
     }
 
     private void Destroy()
     {
-        ObjectPool.Release(gameObject);
+        _renderer.material.color = _deafultColor;
+        _rigidbody.velocity = Vector3.zero;
         _wasInteract = false;
-
-        if (TryGetComponent(out Renderer renderer))
-            renderer.material.color = _deafultColor;
+        ObjectPool.Release(this);
     }
 }

@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class ObjectPoolController : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private SpawnableObject _prefab;
     [SerializeField] int _capacity = 5;
     [SerializeField] int _maxSize = 5;
 
-    public ObjectPool<GameObject> ObjectPool { get; private set; }
+    public ObjectPool<SpawnableObject> ObjectPool { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         ObjectPool = new(
             createFunc: () => Instantiate(_prefab),
             actionOnGet: (obj) => ActionOnget(obj),
-            actionOnRelease: (obj) => obj.SetActive(false),
+            actionOnRelease: (obj) => obj.gameObject.SetActive(false),
             actionOnDestroy: (obj) => Destroy(obj),
             collectionCheck: true,
             defaultCapacity: _capacity,
@@ -24,9 +22,9 @@ public class ObjectPoolController : MonoBehaviour
             );
     }
 
-    private void ActionOnget(GameObject obj)
+    private void ActionOnget(SpawnableObject obj)
     {
         obj.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        obj.SetActive(true);
+        obj.gameObject.SetActive(true);
     }
 }

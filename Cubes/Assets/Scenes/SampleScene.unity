@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d30511d0ad0c14bb4b756f4b7438a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3625579080602657543, guid: 6e2246b2d7c901440bc44a1e9f1cc267, type: 3}
+  _prefab: {fileID: 103188156161720336, guid: 6e2246b2d7c901440bc44a1e9f1cc267, type: 3}
   _capacity: 5
   _maxSize: 5
 --- !u!4 &284842548
@@ -648,7 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectPoolController: {fileID: 284842547}
-  _prefab: {fileID: 3625579080602657543, guid: 6e2246b2d7c901440bc44a1e9f1cc267, type: 3}
   _radius: 2.44
   _timePeriods: 1
 --- !u!4 &745751559
