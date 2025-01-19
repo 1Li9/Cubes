@@ -1,22 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ColorChanger), typeof(Renderer), typeof(Rigidbody))]
+[RequireComponent(typeof(ColorChanger), typeof(Renderer))]
 public class Cube : SpawnableObject, IInteractable
 {
     [SerializeField] private Color _deafultColor = Color.white;
-    [SerializeField] private int _minLifeTime = 2;
-    [SerializeField] private int _maxLifeTime = 5;
+    [SerializeField] private float _minLifeTime = 2.0f;
+    [SerializeField] private float _maxLifeTime = 5.0f;
 
     private ColorChanger _colorChanger;
     private Renderer _renderer;
-    private Rigidbody _rigidbody;
     private bool _wasInteract = false;
 
     private void Awake()
     {
         _colorChanger = GetComponent<ColorChanger>();
         _renderer = GetComponent<Renderer>();
-        _rigidbody = GetComponent<Rigidbody>();
         _renderer.material.color = _deafultColor;
     }
 
@@ -30,14 +28,13 @@ public class Cube : SpawnableObject, IInteractable
         _colorChanger.SetRandom(_renderer);
 
         float lifeTime = Random.Range(_minLifeTime, _maxLifeTime);
-        Invoke(nameof(Destroy), lifeTime);
+        StartCoroutine(Timer.DoActionDelayed(() => Destroy(), lifeTime));
     }
 
     private void Destroy()
     {
         _renderer.material.color = _deafultColor;
-        _rigidbody.velocity = Vector3.zero;
         _wasInteract = false;
-        ObjectPool.Release(this);
+        ReleasePlace.Release(this);
     }
 }

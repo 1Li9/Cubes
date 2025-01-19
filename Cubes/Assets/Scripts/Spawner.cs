@@ -1,18 +1,14 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private ObjectPoolController _objectPoolController;
     [SerializeField] private float _radius;
-    [SerializeField] private float _timePeriods;
-
-    private ObjectPool<SpawnableObject> _objectPool;
+    [SerializeField] private float _timePeriod;
 
     private void Start()
     {
-        _objectPool = _objectPoolController.ObjectPool;
-        InvokeRepeating(nameof(Spawn), 0.0f, _timePeriods);
+        StartCoroutine(Timer.DoActionRepeating(() => Spawn(), _timePeriod));
     }
 
     private void OnDrawGizmos()
@@ -23,10 +19,10 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        SpawnableObject obj = _objectPool.Get();
+        SpawnableObject obj = _objectPoolController.Get();
         Vector3 position = Random.insideUnitSphere * _radius + transform.position;
 
-        obj.ObjectPool = _objectPool;
+        obj.ReleasePlace = _objectPoolController;
         obj.transform.position = position;
     }
 }
