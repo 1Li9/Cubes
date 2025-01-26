@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ObjectPoolController : MonoBehaviour, IReleasible<SpawnableObject>
+public class CubePool : MonoBehaviour
 {
-    [SerializeField] private SpawnableObject _prefab;
+    [SerializeField] private Cube _prefab;
     [SerializeField] int _capacity = 5;
     [SerializeField] int _maxSize = 5;
 
-    private ObjectPool<SpawnableObject> _objectPool;
+    private ObjectPool<Cube> _objectPool;
 
     private void Awake()
     {
@@ -22,17 +22,17 @@ public class ObjectPoolController : MonoBehaviour, IReleasible<SpawnableObject>
             );
     }
 
-    public void Release(SpawnableObject obj) => _objectPool.Release(obj);
+    public void Release(Cube obj) => _objectPool.Release(obj);
 
-    public SpawnableObject Get() => _objectPool.Get();
+    public Cube Get() => _objectPool.Get();
 
-    private void ActionOnget(SpawnableObject obj)
+    private void ActionOnget(Cube obj)
     {
         obj.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         obj.gameObject.SetActive(true);
     }
 
-    private static void ActionOnRelease(SpawnableObject obj)
+    private void ActionOnRelease(Cube obj)
     {
         obj.Rigidbody.velocity = Vector3.zero;
         obj.Rigidbody.angularVelocity = Vector3.zero;

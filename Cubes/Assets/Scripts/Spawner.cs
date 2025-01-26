@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private ObjectPoolController _objectPoolController;
+    [SerializeField] private CubePool _cubePool;
+    [SerializeField] private PoolPutter _poolPutter;
     [SerializeField] private float _radius;
     [SerializeField] private float _timePeriod;
 
@@ -19,10 +20,9 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        SpawnableObject obj = _objectPoolController.Get();
+        Cube obj = _cubePool.Get();
         Vector3 position = Random.insideUnitSphere * _radius + transform.position;
-
-        obj.ReleasePlace = _objectPoolController;
+        _poolPutter.Add(obj);
         obj.transform.position = position;
     }
 }
