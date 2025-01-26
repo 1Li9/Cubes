@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ColorChanger), typeof(Renderer))]
-public class Cube : SpawnableObject, IInteractable
+public class Cube : SpawnableObject
 {
     [SerializeField] private Color _deafultColor = Color.white;
     [SerializeField] private float _minLifeTime = 2.0f;
@@ -18,7 +18,13 @@ public class Cube : SpawnableObject, IInteractable
         _renderer.material.color = _deafultColor;
     }
 
-    public void Interact()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Platform _))
+            Interact();
+    }
+
+    private void Interact()
     {
         if (_wasInteract)
             return;

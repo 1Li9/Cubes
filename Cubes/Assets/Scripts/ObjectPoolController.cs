@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -23,8 +22,9 @@ public class ObjectPoolController : MonoBehaviour, IReleasible<SpawnableObject>
             );
     }
 
-    public SpawnableObject Get() => _objectPool.Get();
     public void Release(SpawnableObject obj) => _objectPool.Release(obj);
+
+    public SpawnableObject Get() => _objectPool.Get();
 
     private void ActionOnget(SpawnableObject obj)
     {
