@@ -1,1 +1,1 @@
-public class CubeSpawnerUI : SpawnerUI<Cube> { }
+public class CubeSpawnerUI : ObjectPoolUI<Cube> { }

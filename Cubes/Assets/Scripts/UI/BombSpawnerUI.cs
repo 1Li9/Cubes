@@ -1,1 +1,1 @@
-public class BombSpawnerUI : SpawnerUI<Bomb> { }
+public class BombSpawnerUI : ObjectPoolUI<Bomb> { }

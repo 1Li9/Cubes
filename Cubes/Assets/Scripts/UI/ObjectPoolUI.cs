@@ -1,9 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class SpawnerUI<T> : MonoBehaviour where T : SpawnebleObject
+public class ObjectPoolUI<T> : MonoBehaviour where T : SpawnebleObject
 {
-    [SerializeField] private SpawnerHandler<T> _spawner;
+    [SerializeField] private ObjectPoolHandler<T> _objectPool;
 
     [SerializeField] private TMP_Text _spawnedObjectsCount;
     [SerializeField] private TMP_Text _objectsCount;
@@ -11,16 +11,16 @@ public class SpawnerUI<T> : MonoBehaviour where T : SpawnebleObject
 
     private void OnEnable()
     {
-        _spawner.SpawnedObjectsCountChanged += SetSpawnedObjectsCount;
-        _spawner.ObjectsCountChanged += SetObjectsCount;
-        _spawner.ActiveObjectsCountChanged += SetActiveObjectsCount;
+        _objectPool.SpawnedObjectsCountChanged += SetSpawnedObjectsCount;
+        _objectPool.ObjectsCountChanged += SetObjectsCount;
+        _objectPool.ActiveObjectsCountChanged += SetActiveObjectsCount;
     }
 
     private void OnDisable()
     {
-        _spawner.SpawnedObjectsCountChanged -= SetSpawnedObjectsCount;
-        _spawner.ObjectsCountChanged -= SetObjectsCount;
-        _spawner.ActiveObjectsCountChanged -= SetActiveObjectsCount;
+        _objectPool.SpawnedObjectsCountChanged -= SetSpawnedObjectsCount;
+        _objectPool.ObjectsCountChanged -= SetObjectsCount;
+        _objectPool.ActiveObjectsCountChanged -= SetActiveObjectsCount;
     }
 
     private void SetSpawnedObjectsCount(int count) =>

@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class EventPublisher : MonoBehaviour
+public abstract class SpawnEventPublisher : MonoBehaviour
 {
-    public abstract event Action<Vector3> Event;
+    public abstract event Action<Vector3> Spawning;
 
     public abstract void Activate();
 

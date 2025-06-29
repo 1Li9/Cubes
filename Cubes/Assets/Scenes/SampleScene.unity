@@ -245,11 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cab50eeefc25c2469cf912dacd0c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: {fileID: 7205662822032803359}
   _objectPool: {fileID: 1038646487}
   _poolPutter: {fileID: 1561178877}
   _eventPublisher: {fileID: 898074595}
-  _timePeriod: 3
 --- !u!4 &77358070
 Transform:
   m_ObjectHideFlags: 0
@@ -800,7 +798,7 @@ GameObject:
   - component: {fileID: 591881263}
   - component: {fileID: 591881266}
   m_Layer: 5
-  m_Name: BombSpawnerUI
+  m_Name: BombOPUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -906,7 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7188d7c0de00844aac3e551e7d3505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 77358069}
+  _objectPool: {fileID: 1038646487}
   _spawnedObjectsCount: {fileID: 2069697653}
   _objectsCount: {fileID: 1477708135}
   _activeObjectsCount: {fileID: 1386878040}
@@ -1147,11 +1145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3075a168b07ee2446ac058a2fe0245b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: {fileID: 7205662822032803359}
   _objectPool: {fileID: 95594674}
   _poolPutter: {fileID: 1684403958}
   _eventPublisher: {fileID: 1760051007}
-  _timePeriod: 2
 --- !u!1 &917244816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1509,7 @@ GameObject:
   - component: {fileID: 1177916846}
   - component: {fileID: 1177916849}
   m_Layer: 5
-  m_Name: CubeSpawnerUI (1)
+  m_Name: 'CubeOPUI '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1619,7 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b0e3faff773564b8919ed5078bb822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 908809966}
+  _objectPool: {fileID: 95594674}
   _spawnedObjectsCount: {fileID: 265657460}
   _objectsCount: {fileID: 1195758409}
   _activeObjectsCount: {fileID: 388266959}

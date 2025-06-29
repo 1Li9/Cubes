@@ -12,9 +12,11 @@ public class ObjectPoolHandler<T> : MonoBehaviour where T : SpawnebleObject
 
     private int _objectsCount;
     private int _activeObjectsCount;
+    private int _spawnedObjectsCount;
 
     public event Action<int> ObjectsCountChanged;
     public event Action<int> ActiveObjectsCountChanged;
+    public event Action<int> SpawnedObjectsCountChanged;
 
     private void Awake()
     {
@@ -43,7 +45,10 @@ public class ObjectPoolHandler<T> : MonoBehaviour where T : SpawnebleObject
     public T Get()
     {
         _activeObjectsCount++;
+        _spawnedObjectsCount++;
+
         ActiveObjectsCountChanged?.Invoke(_activeObjectsCount);
+        SpawnedObjectsCountChanged?.Invoke(_spawnedObjectsCount);
 
         return _objectPool.Get();
     }
